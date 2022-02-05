@@ -1,0 +1,66 @@
+#include <stdio.h>
+void f(char**);
+int main()
+{
+    char *argv[] = { "Tb", "Td", "Tf", "Th", "Tj", "Tl" };
+    f(argv);
+    return 0;
+}
+void f(char **p)
+{
+    char *t;
+    t = (p += sizeof(int))[-1];
+    printf("%s\n", t);
+}
+
+---------------------------------------
+
+main() {
+
+	typedef union {
+	int a;
+	char b[10];
+	float c;
+	}
+
+	Union;
+	Union x,y = {100};
+	x.a = 50;
+	strcpy(x.b,"hello");
+	x.c = 21.50;
+	printf("Union x : %d %s %f n",x.a,x.b,x.c);
+	printf("Union y : %d %s %f n",y.a,y.b,y.c);
+}
+
+---------------------------------------
+
+#include <stdio.h>
+#include <stdlib.h>
+  
+int main(void)
+{
+    int i;
+    int *ptr = (int *) malloc(5 * sizeof(int));
+  
+    for (i=0; i<5; i++)
+        *(ptr + i) = i;
+  
+    printf("%d ", *ptr++);
+    printf("%d ", *(ptr)++);
+    printf("%d ", *ptr);
+    printf("%d ", *++ptr);
+    printf("%d ", ++*ptr);
+}
+
+---------------------------------------
+a.txt -> Print & copy
+
+employee                | Dept
+emp_id, name , dept_id  |   dept_id, dept_name
+
+
+select count(employee.emp_id), Dept.dept_name
+from employee , Dept
+where employee.dept_id = Dept.dept_id
+group by dept_name;
+
